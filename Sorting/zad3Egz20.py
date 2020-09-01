@@ -1,25 +1,28 @@
-from random import randint
+from zad3testy import runtests
 import math
-# n no liczba kubelkow jakie tworzymy, musimy znac ja chociazby przyblizona
 
-def bucketSort(arr, a):
+    
+def fast_sort(arr, a):
     n = 11
-    Max = max(arr)
     buckets = [[] for _ in range(n)] 
     
     for i in arr:
-        # normalizacja: dzielimy elementy przez max, dzieki czemu wszystkie beda z przedzialu [0,1]
-        normNum = i/Max 
-        bucketIdx = int((n-1) * normNum) # wybieram bucket
-        buckets[bucketIdx].append(i)     # dodaje liczbe do bucketa
+        bucketIdx = math.floor(math.log(i,2)/len(arr)) 
+        buckets[bucketIdx].append(i)    
     
     for i in range(n):
-        buckets[i] = sorted(buckets[i], key = log(x,a))     
+        buckets[i] = sorted(buckets[i])     
         #sortuje obojetnie jaka metoda, bo liczba elementow jest stala
+        #nie wbudowanym
     
     output = []
+        
+    for bucket in buckets:
+        output += bucket
+    return output
+
     
-    for i in range(n): # i-ty bucket
-        for j in range(len(buckets[i])): # j-ty element
-            output.append(buckets[i][j])
-    return output,buckets
+
+
+
+runtests( fast_sort )
